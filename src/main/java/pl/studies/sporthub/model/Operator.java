@@ -36,7 +36,7 @@ public class Operator {
     @JoinColumn(name="id_coach", referencedColumnName = "id")
     private Coach coach;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
-    private Set<Task> tasks;
+//    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
+//    private Set<Task> tasks;
 
 }

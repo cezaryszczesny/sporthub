@@ -1,7 +1,10 @@
 package pl.studies.sporthub.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.account.AccountDto;
 
 import java.util.Date;
@@ -21,8 +24,11 @@ public class Account {
     @OneToOne(targetEntity = Operator.class)
     private Operator operator;
 
+    @Email
     @Column(unique = true)
+    @NotNull
     private String email;
+    @NotNull
     private String password;
     private Date createTime;
 
@@ -33,6 +39,13 @@ public class Account {
 
 
     public void apply(AccountDto dto) {
+        BeanUtils.copyProperties(dto, this);
+    }
 
+
+    public AccountDto createDto() {
+        AccountDto dto = new AccountDto();
+        BeanUtils.copyProperties(this,dto);
+        return dto;
     }
 }

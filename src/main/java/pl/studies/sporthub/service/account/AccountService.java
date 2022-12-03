@@ -6,7 +6,9 @@ import pl.studies.sporthub.model.Account;
 
 public interface AccountService  {
 
-    void register(AccountDto dto);
+    Long register(AccountDto dto);
+
+    AccountDto load(Long id);
 
 
 }

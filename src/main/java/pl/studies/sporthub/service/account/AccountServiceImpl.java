@@ -1,25 +1,32 @@
 package pl.studies.sporthub.service.account;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.studies.sporthub.model.Account;
 
+import java.util.Optional;
+
 
 @Service
+@AllArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
 
-    @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+
+    @Override
+    public Long register(AccountDto dto) {
+        Account account = new Account();
+        account.apply(dto);
+        Account registeredAccount = accountRepository.save(account);
+        return registeredAccount.getId();
     }
 
 
     @Override
-    public void register(AccountDto dto) {
-        Account account = new Account();
-        account.apply(dto);
-        accountRepository.save(account);
+    public AccountDto load(Long id) {
+        Optional<Account> load = accountRepository.findById(id);
+        Account account = load.get();
+        return account.createDto();
     }
 }
