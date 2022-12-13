@@ -33,18 +33,14 @@ import static org.assertj.core.api.Assertions.*;
     @Test
     public void shouldThrowExceptionWhenAccountWithoutEmail(){
         Account accountWithoutEmail = createAccountWithoutEmail();
-        assertThatThrownBy(() ->{
-            repo.save(accountWithoutEmail);
-        }).isInstanceOf(ConstraintViolationException.class);
+        assertThatThrownBy(() -> repo.save(accountWithoutEmail)).isInstanceOf(ConstraintViolationException.class);
     }
 
     @Test
     public void shouldThrowExceptionWhenIncorrectEmailFormat(){
         Account wrongEmailAccount = createTestAccount();
         wrongEmailAccount.setEmail("a");
-        assertThatThrownBy(() ->{
-            repo.save(wrongEmailAccount);
-        }).isInstanceOf(ConstraintViolationException.class);
+        assertThatThrownBy(() -> repo.save(wrongEmailAccount)).isInstanceOf(ConstraintViolationException.class);
     }
 
 
