@@ -1,6 +1,7 @@
 package pl.studies.sporthub.service.account;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.studies.sporthub.model.Account;
 
@@ -24,9 +25,14 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AccountDto load(Long id) {
+    public AccountDto load(Long id){
         Optional<Account> load = accountRepository.findById(id);
-        Account account = load.get();
-        return account.createDto();
+        if(load.isPresent()){
+            Account account = load.get();
+            return account.createDto();
+        } else{
+            throw new ObjectNotFoundException(Account.class.getName(), id);
+        }
+
     }
 }
