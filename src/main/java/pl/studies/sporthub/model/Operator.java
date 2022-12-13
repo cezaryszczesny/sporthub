@@ -3,6 +3,7 @@ package pl.studies.sporthub.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Operator {
     @JoinColumn(name="id_coach", referencedColumnName = "id")
     private Coach coach;
 
-//    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
-//    private Set<Task> tasks;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
+    private Set<Task> tasks;
 
 }
