@@ -25,13 +25,12 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AccountDto load(Long id){
+    public AccountDto load(Long id) {
         Optional<Account> load = accountRepository.findById(id);
-        if(load.isPresent()){
+        if (load.isPresent()) {
             Account account = load.get();
-            account.setEmail("costam@lksna.com");
             return account.createDto();
-        } else{
+        } else {
             throw new ObjectNotFoundException(Account.class.getName(), id);
         }
 
