@@ -3,12 +3,11 @@ package pl.studies.sporthub.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import lombok.Data;
 import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.account.AccountDto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -16,11 +15,12 @@ import java.util.Date;
 @Entity
 public class Account {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(targetEntity = Operator.class)
+    @OneToOne
+    @JoinColumn(name = "id_operator", referencedColumnName = "id")
     private Operator operator;
 
     @Email
@@ -31,9 +31,12 @@ public class Account {
     private String password;
     private Date createTime;
 
+
     @PrePersist
-    void createdTime(){
-        this.createTime = new Date();
+    void createdTime() {
+        Calendar instance = Calendar.getInstance();
+        Date time = instance.getTime();
+        this.createTime = time;
     }
 
 
@@ -44,7 +47,7 @@ public class Account {
 
     public AccountDto createDto() {
         AccountDto dto = new AccountDto();
-        BeanUtils.copyProperties(this,dto);
+        BeanUtils.copyProperties(this, dto);
         return dto;
     }
 }

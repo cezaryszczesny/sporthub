@@ -1,8 +1,8 @@
 package pl.studies.sporthub.controller;
 
-import org.hibernate.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.studies.sporthub.service.account.AccountDto;
 import pl.studies.sporthub.service.account.AccountService;
@@ -19,8 +19,9 @@ public class AccountController extends BaseApiController {
         this.service = service;
     }
 
-    @GetMapping(path="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AccountDto> getAccount(@PathVariable Long id){
+
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AccountDto> getAccount(@PathVariable Long id) {
         try {
             AccountDto account = service.load(id);
             return new ResponseEntity<>(account, HttpStatus.OK);
@@ -29,10 +30,11 @@ public class AccountController extends BaseApiController {
         }
     }
 
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AccountDto> registerAccount(AccountDto dto){
-        try{
+    public ResponseEntity<AccountDto> registerAccount(@RequestBody AccountDto dto) {
+        try {
             Long idRegisteredAccount = service.register(dto);
             AccountDto registeredAccount = service.load(idRegisteredAccount);
             return new ResponseEntity<>(registeredAccount, HttpStatus.CREATED);
