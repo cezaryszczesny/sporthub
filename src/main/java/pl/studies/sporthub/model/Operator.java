@@ -3,7 +3,8 @@ package pl.studies.sporthub.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.BeanUtils;
+import pl.studies.sporthub.service.operator.OperatorDto;
 
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class Operator {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="id_account", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_account", referencedColumnName = "id", nullable = false)
     private Account account;
 
     @NotNull
@@ -25,19 +26,44 @@ public class Operator {
     @NotNull
     private String lastName;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_operator_role", referencedColumnName = "id", nullable = false)
-    private OperatorRole operatorRole;
-
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_player", referencedColumnName = "id")
+    @JoinColumn(name = "id_player", referencedColumnName = "id")
     private Player player;
 
     @OneToOne
-    @JoinColumn(name="id_coach", referencedColumnName = "id")
+    @JoinColumn(name = "id_coach", referencedColumnName = "id")
     private Coach coach;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
     private Set<Task> tasks;
 
+
+    public void apply(OperatorDto dto) {
+        BeanUtils.copyProperties(dto, this);
+    }
+
+
+    public OperatorDto createDto() {
+        OperatorDto dto = new OperatorDto();
+        BeanUtils.copyProperties(this, dto);
+        manageIds(dto);
+        manageTasks(dto);
+        return dto;
+    }
+
+
+    private void manageTasks(OperatorDto dto) {
+        //TODO: obsługa tasków przy operatorze
+    }
+
+
+    private void manageIds(OperatorDto dto) {
+        dto.setIdAccount(account.getId());
+        if (coach != null) {
+            dto.setIdCoach(coach.getId());
+        }
+        if (player != null) {
+            dto.setIdPlayer(player.getId());
+        }
+    }
 }

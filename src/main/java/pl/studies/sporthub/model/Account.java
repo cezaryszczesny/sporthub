@@ -47,6 +47,9 @@ public class Account {
 
     public AccountDto createDto() {
         AccountDto dto = new AccountDto();
+        if (operator != null) {
+            dto.setIdOperator(operator.getId());
+        }
         BeanUtils.copyProperties(this, dto);
         return dto;
     }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public class AccountDto {
 
     private Long id;
+    private Long idOperator;
     private String email;
     private String password;
 
