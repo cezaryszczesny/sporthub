@@ -19,7 +19,7 @@ public class Coach {
     private Operator operator;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_coach_specialty", referencedColumnName = "id")
+    @JoinColumn(name="id_specialty", referencedColumnName = "id")
     private CoachSpecialty specialty;
 
     @NotNull

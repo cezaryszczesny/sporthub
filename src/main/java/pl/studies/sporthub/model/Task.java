@@ -26,7 +26,7 @@ public class Task {
     private String coachFullName;
 
     @NotNull
-    private String creatorName;
+    private String createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_facility")

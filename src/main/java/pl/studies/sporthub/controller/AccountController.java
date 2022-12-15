@@ -2,10 +2,7 @@ package pl.studies.sporthub.controller;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.studies.sporthub.service.account.AccountDto;
 import pl.studies.sporthub.service.account.AccountService;
@@ -21,7 +18,6 @@ public class AccountController extends BaseApiController {
     public AccountController(AccountService service) {
         this.service = service;
     }
-
 
     @GetMapping(path="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDto> getAccount(@PathVariable Long id){
