@@ -4,20 +4,21 @@ import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.studies.sporthub.constance.ConstTest;
 import pl.studies.sporthub.model.Account;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @DataJpaTest
- class AccountRepositoryTest {
+class AccountRepositoryTest extends AbstractAccountTest {
 
     @Autowired
     private AccountRepository repo;
 
+
     @Test
-    public void shouldSaveAccount(){
+    public void shouldSaveAccount() {
         //given
         Account testAccount = createTestAccount();
         //when
@@ -30,30 +31,20 @@ import static org.assertj.core.api.Assertions.*;
         assertThat(savedAccount.getCreateTime()).isNotNull();
     }
 
+
     @Test
-    public void shouldThrowExceptionWhenAccountWithoutEmail(){
+    public void shouldThrowExceptionWhenAccountWithoutEmail() {
         Account accountWithoutEmail = createAccountWithoutEmail();
         assertThatThrownBy(() -> repo.save(accountWithoutEmail)).isInstanceOf(ConstraintViolationException.class);
     }
 
+
     @Test
-    public void shouldThrowExceptionWhenIncorrectEmailFormat(){
+    public void shouldThrowExceptionWhenIncorrectEmailFormat() {
         Account wrongEmailAccount = createTestAccount();
         wrongEmailAccount.setEmail("a");
         assertThatThrownBy(() -> repo.save(wrongEmailAccount)).isInstanceOf(ConstraintViolationException.class);
     }
 
 
-    private Account createTestAccount(){
-        Account account = new Account();
-        account.setEmail(ConstTest.EMAIL);
-        account.setPassword(ConstTest.PASSWORD);
-        return account;
-    }
-
-    private Account createAccountWithoutEmail(){
-        Account account = new Account();
-        account.setPassword(ConstTest.PASSWORD);
-        return account;
-    }
 }
