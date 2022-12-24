@@ -2,10 +2,11 @@ package pl.studies.sporthub.service.operator;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import pl.studies.sporthub.service.AbstractDto;
 
 
 @Data
-public class OperatorDto {
+public class OperatorDto extends AbstractDto {
 
 
     private Long id;

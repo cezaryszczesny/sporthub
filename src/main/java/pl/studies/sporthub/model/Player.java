@@ -2,10 +2,14 @@ package pl.studies.sporthub.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
+import pl.studies.sporthub.service.SimpleRowDto;
+import pl.studies.sporthub.service.player.PlayerDto;
 
 import java.util.Date;
 
 
+@SuppressWarnings("JpaAttributeTypeInspection")
 @Data
 @Entity
 public class Player {
@@ -41,4 +45,28 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "id_diet", referencedColumnName = "id")
     private PlayerDiet playerDiet;
+
+
+    public void apply(PlayerDto dto) {
+        BeanUtils.copyProperties(dto, this);
+    }
+
+
+    public PlayerDto createDto() {
+        PlayerDto dto = new PlayerDto();
+        BeanUtils.copyProperties(this, dto);
+        manageIds(dto);
+        return dto;
+    }
+
+
+    private void manageIds(PlayerDto dto) {
+        if (playerStatus != null) {
+            SimpleRowDto status = new SimpleRowDto(
+                    playerStatus.getId(),
+                    playerStatus.getName()
+            );
+            dto.setStatus(status);
+        }
+    }
 }

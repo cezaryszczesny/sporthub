@@ -3,7 +3,9 @@ package pl.studies.sporthub.service.operator;
 import lombok.AllArgsConstructor;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.studies.sporthub.model.Account;
 import pl.studies.sporthub.model.Operator;
+import pl.studies.sporthub.service.account.AccountRepository;
 
 import java.util.Optional;
 
@@ -13,14 +15,27 @@ import java.util.Optional;
 public class OperatorServiceImpl implements OperatorService {
 
     private final OperatorRepository operatorRepository;
+    private final AccountRepository accountRepository;
 
 
     @Override
     public Long add(OperatorDto dto) {
         Operator operator = new Operator();
         operator.apply(dto);
+        assignOperatorToAccount(operator, dto.getIdAccount());
         Operator savedOperator = operatorRepository.save(operator);
         return savedOperator.getId();
+    }
+
+
+    private void assignOperatorToAccount(Operator operator, Long idAccount) {
+        Optional<Account> possibleAccount = accountRepository.findById(idAccount);
+        if (possibleAccount.isPresent()) {
+            Account account = possibleAccount.get();
+            operator.setAccount(account);
+        } else {
+            //TODO: throw some exception
+        }
     }
 
 
@@ -33,5 +48,17 @@ public class OperatorServiceImpl implements OperatorService {
         } else {
             throw new ObjectNotFoundException(Operator.class.getName(), idOperator);
         }
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        operatorRepository.deleteById(id);
+    }
+
+
+    @Override
+    public void update(OperatorDto dto) {
+
     }
 }

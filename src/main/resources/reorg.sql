@@ -6,7 +6,7 @@ create table account
     id_operator BIGINT,
     email       VARCHAR(255) NOT NULL,
     password    VARCHAR(255) NOT NULL,
-    create_time DATE         NOT NULL,
+    create_time timestamp    NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT account_email_unique UNIQUE (email)
 );

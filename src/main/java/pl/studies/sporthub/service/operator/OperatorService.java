@@ -1,9 +1,8 @@
 package pl.studies.sporthub.service.operator;
 
-public interface OperatorService {
+import pl.studies.sporthub.service.BaseApplicationService;
 
-    Long add(OperatorDto dto);
 
-    OperatorDto load(Long idOperator);
+public interface OperatorService extends BaseApplicationService<OperatorDto> {
 
 }

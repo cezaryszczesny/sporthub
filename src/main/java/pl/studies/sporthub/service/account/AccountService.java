@@ -1,14 +1,10 @@
 package pl.studies.sporthub.service.account;
 
-import org.springframework.data.repository.CrudRepository;
-import pl.studies.sporthub.model.Account;
+
+import pl.studies.sporthub.service.BaseApplicationService;
 
 
-public interface AccountService  {
-
-    Long register(AccountDto dto);
-
-    AccountDto load(Long id);
+public interface AccountService extends BaseApplicationService<AccountDto> {
 
 
 }

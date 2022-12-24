@@ -25,6 +25,8 @@ public class Operator {
     private String firstName;
     @NotNull
     private String lastName;
+    @NotNull
+    private Boolean isPlayer;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_player", referencedColumnName = "id")

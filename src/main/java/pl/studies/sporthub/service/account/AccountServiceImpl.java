@@ -16,7 +16,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public Long register(AccountDto dto) {
+    public Long add(AccountDto dto) {
         Account account = new Account();
         account.apply(dto);
         Account registeredAccount = accountRepository.save(account);
@@ -33,6 +33,18 @@ public class AccountServiceImpl implements AccountService {
         } else {
             throw new ObjectNotFoundException(Account.class.getName(), id);
         }
+
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        accountRepository.deleteById(id);
+    }
+
+
+    @Override
+    public void update(AccountDto dto) {
 
     }
 }

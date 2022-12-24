@@ -39,7 +39,7 @@ class AccountServiceTest extends AbstractAccountTest {
         AccountDto accountToRegister = createTestAccountDto();
         //when
         when(accountRepository.save(any())).thenReturn(createMockAccount());
-        service.register(accountToRegister);
+        service.add(accountToRegister);
 
         //then
         //catch argument

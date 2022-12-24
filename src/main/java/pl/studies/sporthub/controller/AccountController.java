@@ -35,7 +35,7 @@ public class AccountController extends BaseApiController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDto> registerAccount(@RequestBody AccountDto dto) {
         try {
-            Long idRegisteredAccount = service.register(dto);
+            Long idRegisteredAccount = service.add(dto);
             AccountDto registeredAccount = service.load(idRegisteredAccount);
             return new ResponseEntity<>(registeredAccount, HttpStatus.CREATED);
         } catch (Exception e) {
