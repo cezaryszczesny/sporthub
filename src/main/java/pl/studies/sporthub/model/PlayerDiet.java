@@ -4,15 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import pl.studies.sporthub.service.SimpleRowDto;
 
 
 @Entity
-public class PlayerDiet extends AbstractSimpleRow{
+@NoArgsConstructor
+@AllArgsConstructor
+public class PlayerDiet extends SimpleRow {
 
-    @Override
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    private Long id;
+    protected String name;
+
+
+    public SimpleRowDto createDto() {
+        return createDto(id, name);
     }
 }

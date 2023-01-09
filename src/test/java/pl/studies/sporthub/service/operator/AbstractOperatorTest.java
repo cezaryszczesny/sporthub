@@ -12,9 +12,9 @@ public class AbstractOperatorTest {
 
     protected Operator createMockOperator() {
         Operator operator = new Operator();
-        operator.setId(1L);
         operator.setFirstName(ConstTest.FIRST_NAME);
         operator.setLastName(ConstTest.LAST_NAME);
+        operator.setIsPlayer(Boolean.FALSE);
         Account account = new Account();
         account.setId(ConstTest.ID_ACCOUNT);
         operator.setAccount(account);
@@ -39,7 +39,7 @@ public class AbstractOperatorTest {
         Coach coach = new Coach();
         coach.setId(ConstTest.ID_COACH);
         operator.setCoach(coach);
-        
+
         return operator;
     }
 
