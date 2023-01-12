@@ -54,14 +54,8 @@ public class Player {
     public PlayerDto createDto() {
         PlayerDto dto = new PlayerDto();
         BeanUtils.copyProperties(this, dto);
-        manageIds(dto);
         return dto;
     }
 
 
-    private void manageIds(PlayerDto dto) {
-        if (playerStatus != null) {
-            dto.setStatus(playerStatus.createDto());
-        }
-    }
 }

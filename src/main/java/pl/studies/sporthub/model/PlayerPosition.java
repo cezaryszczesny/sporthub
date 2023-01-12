@@ -6,12 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import pl.studies.sporthub.service.SimpleRowDto;
 
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayerPosition {
+public class PlayerPosition extends SimpleRow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +20,7 @@ public class PlayerPosition {
     protected String name;
 
 
+    public SimpleRowDto createDto() {
+        return createDto(id, name);
+    }
 }
