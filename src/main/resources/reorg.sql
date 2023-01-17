@@ -23,14 +23,14 @@ create table operator
 );
 create table task
 (
-    id               BIGSERIAL   NOT NULL,
-    id_operator      BIGINT      NOT NULL,
-    player_full_name VARCHAR(50) NOT NULL,
-    coach_full_name  VARCHAR(50) NOT NULL,
-    created_by       VARCHAR(50) NOT NULL,
-    id_facility      BIGINT,
-    from_time        timestamp   NOT NULL,
-    to_time          timestamp   NOT NULL,
+    id                  BIGSERIAL   NOT NULL,
+    description         VARCHAR(50) NOT NULL,
+    id_operator_player  BIGINT      NOT NULL,
+    id_operator_coach   BIGINT      NOT NULL,
+    id_operator_creator BIGINT      NOT NULL,
+    id_facility         BIGINT,
+    from_time           timestamp   NOT NULL,
+    to_time             timestamp   NOT NULL,
     PRIMARY KEY (id)
 );
 create table facility
@@ -65,7 +65,7 @@ create table player
     height      INTEGER   NOT NULL,
     weight      INTEGER   NOT NULL,
     team_name   VARCHAR(25),
-    id_stats    BIGINT    NOT NUll,
+    id_stats    BIGINT,
     id_foot     BIGINT    NOT NULL,
     id_status   BIGINT    NOT NULL,
     id_diet     BIGINT    NOT NULL,
@@ -133,7 +133,11 @@ alter table previous_season_stats
 alter table coach
     add constraint coach_id_specialty_fkey foreign key (id_specialty) references coach_specialty (id);
 alter table task
-    add constraint task_id_operator_fkey foreign key (id_operator) references operator (id);
+    add constraint task_id_operator_coach_fkey foreign key (id_operator_player) references operator (id);
+alter table task
+    add constraint task_id_operator_player_fkey foreign key (id_operator_coach) references operator (id);
+alter table task
+    add constraint task_id_operator_creator_fkey foreign key (id_operator_creator) references operator (id);
 alter table task
     add constraint task_id_facility_fkey foreign key (id_facility) references facility (id);
 
