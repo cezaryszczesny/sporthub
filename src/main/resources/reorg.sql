@@ -133,9 +133,9 @@ alter table previous_season_stats
 alter table coach
     add constraint coach_id_specialty_fkey foreign key (id_specialty) references coach_specialty (id);
 alter table task
-    add constraint task_id_operator_coach_fkey foreign key (id_operator_player) references operator (id);
+    add constraint task_id_operator_player_fkey foreign key (id_operator_player) references operator (id);
 alter table task
-    add constraint task_id_operator_player_fkey foreign key (id_operator_coach) references operator (id);
+    add constraint task_id_operator_coach_fkey foreign key (id_operator_coach) references operator (id);
 alter table task
     add constraint task_id_operator_creator_fkey foreign key (id_operator_creator) references operator (id);
 alter table task

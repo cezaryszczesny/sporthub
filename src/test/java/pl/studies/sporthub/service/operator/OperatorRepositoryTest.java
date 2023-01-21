@@ -22,10 +22,9 @@ public class OperatorRepositoryTest extends AbstractOperatorTest {
 
     @Test
     public void shouldSaveOperator() {
-        accountRepository.save(createTestAccount());
+        Account savedAccount = accountRepository.save(createTestAccount());
         Operator operator = createMockOperator();
         Operator savedOperator = repo.save(operator);
-
         assertThat(savedOperator.getId()).isNotNull();
     }
 

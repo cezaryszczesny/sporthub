@@ -10,5 +10,5 @@ public class CoachDto extends AbstractDto {
     private Long id;
     private Long idOperator;
     private Long idSpecialty;
-    private boolean isActive;
+    private Boolean isActive;
 }

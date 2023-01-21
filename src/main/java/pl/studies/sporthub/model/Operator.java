@@ -36,8 +36,11 @@ public class Operator {
     @JoinColumn(name = "id_coach", referencedColumnName = "id")
     private Coach coach;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operator")
-    private Set<Task> tasks;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operatorPlayer")
+    private Set<Task> playerTasks;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "operatorCoach")
+    private Set<Task> coachTasks;
 
 
     public void apply(OperatorDto dto) {

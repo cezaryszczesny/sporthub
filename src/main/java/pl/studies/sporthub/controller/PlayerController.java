@@ -1,18 +1,14 @@
 package pl.studies.sporthub.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import pl.studies.sporthub.model.PlayerDiet;
 import pl.studies.sporthub.model.PlayerFoot;
 import pl.studies.sporthub.model.PlayerPosition;
 import pl.studies.sporthub.model.PlayerStatus;
 import pl.studies.sporthub.service.SimpleRowDto;
-import pl.studies.sporthub.service.player.PlayerDietRepository;
-import pl.studies.sporthub.service.player.PlayerFootRepository;
-import pl.studies.sporthub.service.player.PlayerPositionRepository;
-import pl.studies.sporthub.service.player.PlayerStatusRepository;
+import pl.studies.sporthub.service.player.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +16,29 @@ import java.util.List;
 
 @RestController
 @RequestMapping("players")
+@AllArgsConstructor
 public class PlayerController extends BaseApiController {
 
-    @Autowired
     private PlayerFootRepository playerFootRepository;
-    @Autowired
     private PlayerStatusRepository playerStatusRepository;
-    @Autowired
     private PlayerDietRepository playerDietRepository;
-    @Autowired
     private PlayerPositionRepository playerPositionRepository;
+    private PlayerService playerService;
+
+
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private PlayerDto getPlayer(@PathVariable Long id) {
+        return playerService.load(id);
+    }
+
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public PlayerDto addPlayer(@RequestBody PlayerDto dto) {
+        Long idSavedPlayer = playerService.add(dto);
+        PlayerDto savedPlayer = playerService.load(idSavedPlayer);
+        return savedPlayer;
+    }
 
 
     @GetMapping(path = "/feet")
@@ -66,4 +75,5 @@ public class PlayerController extends BaseApiController {
         positions.forEach(position -> positionsList.add(position.createDto()));
         return positionsList;
     }
+
 }

@@ -24,7 +24,15 @@ public class OperatorServiceImpl implements OperatorService {
         operator.apply(dto);
         assignOperatorToAccount(operator, dto.getIdAccount());
         Operator savedOperator = operatorRepository.save(operator);
+        manageAccount(savedOperator);
         return savedOperator.getId();
+    }
+
+
+    private void manageAccount(Operator savedOperator) {
+        Account account = savedOperator.getAccount();
+        account.setOperator(savedOperator);
+        accountRepository.save(account);
     }
 
 

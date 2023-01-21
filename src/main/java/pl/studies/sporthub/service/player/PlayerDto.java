@@ -19,5 +19,5 @@ public class PlayerDto extends AbstractDto {
     private Long idFoot;
     private Long idStatus;
     private Long idDiet;
-
+    private Long idPreviousSeasonStats;
 }

@@ -10,10 +10,9 @@ import java.util.Date;
 public class TaskDto extends AbstractDto {
 
     private Long id;
-    private Long idOperator;
-    private String coachFullName;
-    private String createdBy;
-    private Long idFacility;
+    private Long idOperatorPlayer;
+    private Long idOperatorCoach;
+    private Long idOperatorCreator;
     private Date fromTime;
     private Date toTime;
 }

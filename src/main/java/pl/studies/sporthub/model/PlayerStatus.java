@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.studies.sporthub.service.SimpleRowDto;
 
 
 @Entity
 @NoArgsConstructor
+@Data
 public class PlayerStatus extends SimpleRow {
 
     @Id

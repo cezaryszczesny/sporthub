@@ -45,6 +45,10 @@ public class Player {
     @JoinColumn(name = "id_diet", referencedColumnName = "id")
     private PlayerDiet playerDiet;
 
+    @OneToOne
+    @JoinColumn(name = "id_stats", referencedColumnName = "id")
+    private PreviousSeasonStats previousSeasonStats;
+
 
     public void apply(PlayerDto dto) {
         BeanUtils.copyProperties(dto, this);
@@ -54,7 +58,25 @@ public class Player {
     public PlayerDto createDto() {
         PlayerDto dto = new PlayerDto();
         BeanUtils.copyProperties(this, dto);
+        manageIds(dto);
         return dto;
+    }
+
+
+    private void manageIds(PlayerDto dto) {
+        //not null values
+        dto.setIdPlayerPosition(playerPosition.getId());
+        dto.setIdFoot(playerFoot.getId());
+        dto.setIdStatus(playerStatus.getId());
+        dto.setIdOperator(operator.getId());
+
+        //possible null values
+        if (playerDiet != null) {
+            dto.setIdDiet(playerDiet.getId());
+        }
+        if (previousSeasonStats != null) {
+            dto.setIdPreviousSeasonStats(previousSeasonStats.getId());
+        }
     }
 
 

@@ -16,29 +16,25 @@ public class Task {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_operator")
-    private Operator operator;
-
-    @NotNull
-    private String playerFullName;
-
-    @NotNull
-    private String coachFullName;
-
-    @NotNull
-    private String createdBy;
+    @JoinColumn(name = "id_operator_player")
+    private Operator operatorPlayer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_facility")
-    private Facility facility;
+    @JoinColumn(name = "id_operator_coach")
+    private Operator operatorCoach;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_operator_creator")
+    private Operator operatorCreator;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_facility")
+    private Facility facility;
     @NotNull
     private Date fromTime;
 
     @NotNull
     private Date toTime;
-
-
 
 
 }

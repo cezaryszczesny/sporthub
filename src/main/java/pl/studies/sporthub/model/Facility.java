@@ -6,6 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
+import pl.studies.sporthub.service.facility.FacilityDto;
+
 
 @Data
 @Entity
@@ -26,4 +29,15 @@ public class Facility {
 
     private Integer peopleLimit;
 
+
+    public void apply(FacilityDto dto) {
+        BeanUtils.copyProperties(dto, this);
+    }
+
+
+    public FacilityDto createDto() {
+        FacilityDto dto = new FacilityDto();
+        BeanUtils.copyProperties(this, dto);
+        return dto;
+    }
 }
