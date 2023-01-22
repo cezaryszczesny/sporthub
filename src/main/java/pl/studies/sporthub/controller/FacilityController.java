@@ -19,6 +19,7 @@ public class FacilityController extends BaseApiController {
 
     @GetMapping("/{id}")
     public FacilityDto getFacilityById(@PathVariable Long id) {
+        loginBasic64();
         return service.load(id);
     }
 
@@ -26,6 +27,7 @@ public class FacilityController extends BaseApiController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public FacilityDto addFacility(@RequestBody FacilityDto dto) {
+        loginBasic64();
         Long idSavedFacility = service.add(dto);
         return service.load(idSavedFacility);
     }
@@ -33,6 +35,7 @@ public class FacilityController extends BaseApiController {
 
     @DeleteMapping("/{id}")
     public String deleteFacility(@PathVariable Long id) {
+        loginBasic64();
         service.delete(id);
         return DELETE_SUCCESSFUL_MSG;
     }
@@ -40,6 +43,7 @@ public class FacilityController extends BaseApiController {
 
     @GetMapping
     public List<FacilityDto> findFacilities() {
+        loginBasic64();
         return service.findAllFacilities();
     }
 

@@ -1,7 +1,6 @@
 package pl.studies.sporthub.service.account;
 
 import org.hibernate.ObjectNotFoundException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -25,12 +24,6 @@ class AccountServiceTest extends AbstractAccountTest {
     private AccountRepository accountRepository;
 
     private AccountServiceImpl service;
-
-
-    @BeforeEach
-    void setUp() {
-        service = new AccountServiceImpl(accountRepository);
-    }
 
 
     @Test

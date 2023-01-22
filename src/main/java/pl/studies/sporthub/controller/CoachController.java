@@ -17,6 +17,7 @@ public class CoachController extends BaseApiController {
 
     @GetMapping(path = "/{id}")
     public CoachDto getCoach(@PathVariable Long id) {
+        loginBasic64();
         return service.load(id);
     }
 
@@ -24,6 +25,7 @@ public class CoachController extends BaseApiController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public CoachDto addCoach(@RequestBody CoachDto dto) {
+        loginBasic64();
         Long idSavedCoach = service.add(dto);
         return service.load(idSavedCoach);
     }

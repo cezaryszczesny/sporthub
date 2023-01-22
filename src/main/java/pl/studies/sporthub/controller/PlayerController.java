@@ -28,6 +28,7 @@ public class PlayerController extends BaseApiController {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     private PlayerDto getPlayer(@PathVariable Long id) {
+        loginBasic64();
         return playerService.load(id);
     }
 
@@ -35,6 +36,7 @@ public class PlayerController extends BaseApiController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public PlayerDto addPlayer(@RequestBody PlayerDto dto) {
+        loginBasic64();
         Long idSavedPlayer = playerService.add(dto);
         PlayerDto savedPlayer = playerService.load(idSavedPlayer);
         return savedPlayer;

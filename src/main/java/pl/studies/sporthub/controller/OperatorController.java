@@ -17,6 +17,7 @@ public class OperatorController extends BaseApiController {
 
     @GetMapping(path = "/{id}")
     public OperatorDto getOperator(@PathVariable Long id) {
+        loginBasic64();
         return service.load(id);
     }
 
@@ -24,6 +25,7 @@ public class OperatorController extends BaseApiController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public OperatorDto saveOperator(@RequestBody OperatorDto dto) {
+        loginBasic64();
         Long idSavedOperator = service.add(dto);
         return service.load(idSavedOperator);
     }

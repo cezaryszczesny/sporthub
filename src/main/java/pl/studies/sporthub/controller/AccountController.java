@@ -22,6 +22,7 @@ public class AccountController extends BaseApiController {
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDto> getAccount(@PathVariable Long id) {
+        loginBasic64();
         try {
             AccountDto account = service.load(id);
             return new ResponseEntity<>(account, HttpStatus.OK);
