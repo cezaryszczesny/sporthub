@@ -8,4 +8,8 @@ import pl.studies.sporthub.model.Operator;
 @Repository
 public interface OperatorRepository extends CrudRepository<Operator, Long> {
 
+    Operator findByCoachId(Long idCoach);
+
+    Operator findByPlayerId(Long idPlayer);
+
 }
