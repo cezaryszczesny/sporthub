@@ -22,12 +22,14 @@ public class BaseApiController {
 
 
     protected void loginBasic64() {
+        AuthAO authFromHeader;
         try {
-            AuthAO authFromHeader = getAuthFromHeader(request.getHeader(HEADER_AUTH));
-            loginService.checkCredentials(authFromHeader);
+            authFromHeader = getAuthFromHeader(request.getHeader(HEADER_AUTH));
+
         } catch (Exception e) {
             throw new RuntimeException("Nie podano danych logowania");
         }
+        loginService.checkCredentials(authFromHeader);
 
     }
 

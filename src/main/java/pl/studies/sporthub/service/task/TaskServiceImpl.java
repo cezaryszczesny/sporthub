@@ -9,6 +9,9 @@ import pl.studies.sporthub.model.Task;
 import pl.studies.sporthub.service.facility.FacilityRepository;
 import pl.studies.sporthub.service.operator.OperatorRepository;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,12 +61,15 @@ public class TaskServiceImpl implements TaskService {
 
 
     private void assignCoachOperator(Long idCoach, Task task) {
-        Operator coachOperator = operatorRepository.findByCoachId(idCoach);
-        if (coachOperator != null) {
-            task.setOperatorCoach(coachOperator);
-        } else {
-            throw new ObjectNotFoundException("Nie znaleziono trenera");
+        if (idCoach != null) {
+            Operator coachOperator = operatorRepository.findByCoachId(idCoach);
+            if (coachOperator != null) {
+                task.setOperatorCoach(coachOperator);
+            } else {
+                throw new ObjectNotFoundException("Nie znaleziono trenera");
+            }
         }
+
     }
 
 
@@ -101,6 +107,31 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void update(TaskDto dto) {
-
+        add(dto);
     }
+
+
+    @Override
+    public List<TaskDto> findAllByOperatorPlayerId(Long idOperatorPlayer) {
+        List<Task> tasks = repo.findByOperatorPlayerId(idOperatorPlayer);
+        List<TaskDto> dtos = new ArrayList<>();
+        for (Task task : tasks) {
+            dtos.add(task.createDto());
+        }
+        return dtos;
+    }
+
+
+    @Override
+    public List<TaskDto> findAllByFromTime(Long idOperator, Date fromTime) {
+        return null;
+    }
+
+
+    @Override
+    public List<TaskDto> findAllBetweenTime(Long idOperator, Date startDate, Date endDate) {
+        return null;
+    }
+
+
 }
