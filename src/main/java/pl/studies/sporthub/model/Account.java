@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.account.AccountDto;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@ToString
 public class Account {
 
     @Id

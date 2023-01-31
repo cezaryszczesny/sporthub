@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.studies.sporthub.service.SimpleRowDto;
 
 
@@ -14,6 +15,7 @@ import pl.studies.sporthub.service.SimpleRowDto;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class PlayerDiet extends SimpleRow {
 
     @Id

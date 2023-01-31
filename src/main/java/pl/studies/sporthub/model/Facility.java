@@ -6,12 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.facility.FacilityDto;
 
 
 @Data
 @Entity
+@ToString
 public class Facility {
 
     @Id

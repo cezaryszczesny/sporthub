@@ -25,6 +25,8 @@ public class PlayerController extends BaseApiController {
     private PlayerPositionRepository playerPositionRepository;
     private PlayerService playerService;
 
+    private PlayerRepository repo;
+
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     private PlayerDto getPlayer(@PathVariable Long id) {
@@ -40,6 +42,13 @@ public class PlayerController extends BaseApiController {
         Long idSavedPlayer = playerService.add(dto);
         PlayerDto savedPlayer = playerService.load(idSavedPlayer);
         return savedPlayer;
+    }
+
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    private List<PlayerDto> getAllPlayers() {
+        loginBasic64();
+        return playerService.findAll();
     }
 
 

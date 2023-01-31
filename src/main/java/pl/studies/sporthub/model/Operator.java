@@ -3,6 +3,7 @@ package pl.studies.sporthub.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.operator.OperatorDto;
 
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@ToString
 public class Operator {
 
     @Id

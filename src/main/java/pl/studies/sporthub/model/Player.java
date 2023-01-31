@@ -2,6 +2,7 @@ package pl.studies.sporthub.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.beans.BeanUtils;
 import pl.studies.sporthub.service.player.PlayerDto;
 
@@ -11,6 +12,7 @@ import java.util.Date;
 @SuppressWarnings("JpaAttributeTypeInspection")
 @Data
 @Entity
+@ToString
 public class Player {
 
     @Id

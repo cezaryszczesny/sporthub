@@ -7,6 +7,8 @@ import pl.studies.sporthub.model.*;
 import pl.studies.sporthub.service.operator.OperatorRepository;
 import pl.studies.sporthub.service.previousSeasonStats.PreviousSeasonStatsRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -131,5 +133,14 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void update(PlayerDto dto) {
 
+    }
+
+
+    @Override
+    public List<PlayerDto> findAll() {
+        Iterable<Player> allPlayers = playerRepository.findAll();
+        List<PlayerDto> players = new ArrayList<>();
+        allPlayers.forEach(player -> players.add(player.createDto()));
+        return players;
     }
 }

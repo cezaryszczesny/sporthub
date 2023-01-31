@@ -6,12 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pl.studies.sporthub.service.SimpleRowDto;
 
 
 @Entity
 @NoArgsConstructor
 @Data
+@ToString
 public class PlayerFoot extends SimpleRow {
 
     @Id
